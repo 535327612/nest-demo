@@ -1,0 +1,28 @@
+# 创建用户
+# POST http://127.0.0.1:5000/user HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "name":"xiaoming2",
+#     "email":"123",
+#     "password":"123456"
+# }
+
+# 获取所有用户
+# GET http://127.0.0.1:5000/user HTTP/1.1
+ 
+# 获取指定用户
+# GET http://127.0.0.1:5000/user/30 HTTP/1.1
+
+# 修改用户信息
+# PATCH http://127.0.0.1:5000/user/30 HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "name":"xiaoming2sdfsfds",
+#     "email":"123",
+#     "password":"123456"
+# }
+
+# 删除指定用户
+DELETE http://127.0.0.1:5000/user/31 HTTP/1.1

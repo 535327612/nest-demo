@@ -1,36 +1,25 @@
-import * as crypto from 'crypto';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { calculateMD5 } from 'src/utils';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(createUserDto: CreateUserDto) {
-    try {
-      const hashPwd = crypto
-        .createHash('md5')
-        .update(createUserDto.password)
-        .digest('hex');
-      createUserDto.password = hashPwd;
+  create(createUserDto: CreateUserDto) {
+    createUserDto.password = calculateMD5(createUserDto.password);
 
-      const result = await this.prismaService.user.create({
-        data: createUserDto,
-      });
-      return result;
-    } catch (e: any) {
-      console.log(e);
-    }
+    return this.prismaService.user.create({
+      data: createUserDto,
+    });
   }
 
   async login(loginUserDto: LoginUserDto) {
-    const hashPwd = crypto
-      .createHash('md5')
-      .update(loginUserDto.password)
-      .digest('hex');
+    const hashPwd = calculateMD5(loginUserDto.password);
+
     const users = await this.prismaService.user.findMany({
       where: { password: hashPwd, name: loginUserDto.name },
     });
@@ -42,18 +31,25 @@ export class UserService {
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.prismaService.user.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.prismaService.user.findMany({ where: { id } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user ${updateUserDto}`;
+    if (updateUserDto.password) {
+      updateUserDto.password = calculateMD5(updateUserDto.password);
+    }
+
+    return this.prismaService.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.prismaService.user.delete({ where: { id } });
   }
 }
