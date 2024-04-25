@@ -1,16 +1,17 @@
 # 创建用户
-POST http://127.0.0.1:5000/user HTTP/1.1
-Content-Type: application/json
+# POST http://127.0.0.1:5000/user HTTP/1.1
+# Content-Type: application/json
 
-{
-    "name":"xiaoming2",
-    "email":"123",
-    "password":"123456"
-}
+# {
+#     "name":"xiaoming2",
+#     "email":"123",
+#     "password":"123456"
+# }
 
 # 获取所有用户
-# GET http://127.0.0.1:5000/user HTTP/1.1
- 
+GET http://127.0.0.1:5000/user HTTP/1.1
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsIm5hbWUiOiJ4aWFvbWluZzIiLCJpYXQiOjE3MTQwMzU1ODMsImV4cCI6MTcxNDEyMTk4M30.7ydXMf4aOA5p9gOZQjgHrQ0F660R8FJilrw-JZpZg7s
+
 # 获取指定用户
 # GET http://127.0.0.1:5000/user/1 HTTP/1.1
 

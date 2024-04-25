@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { JwtFlag } from './constants';
 import { AppModule } from './app.module';
 import { SuccessResponse } from './commom/success-response';
 import { PrismaClientExceptionFilter } from './commom/prisma-client-exception/prisma-client-exception.filter';
@@ -17,8 +16,8 @@ async function bootstrap() {
   app.enableCors({
     origin: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', JwtFlag],
-    exposedHeaders: [JwtFlag],
+    allowedHeaders: ['Content-Type', process.env.JWT_FLAG],
+    exposedHeaders: [process.env.JWT_FLAG],
   });
   await app.listen(5000);
 }

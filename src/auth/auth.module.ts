@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtSecret } from '@/constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '@/commom/guard/auth.guard';
 import { PrismaModule } from '@/prisma/prisma.module';
@@ -11,7 +10,7 @@ import { AuthController } from './auth.controller';
   imports: [
     JwtModule.register({
       global: true,
-      secret: JwtSecret,
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
     PrismaModule,
