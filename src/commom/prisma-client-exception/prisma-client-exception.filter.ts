@@ -14,7 +14,6 @@ export class PrismaClientExceptionFilter
   catch(exception: Prisma.PrismaClientKnownRequestError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    console.log('exception.code', exception.code);
     switch (exception.code) {
       case 'P2002': {
         // 不满足唯一约束

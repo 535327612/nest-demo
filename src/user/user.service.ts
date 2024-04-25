@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { calculateMD5 } from '@/utils';
+import { PrismaService } from '@/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { calculateMD5 } from 'src/utils';
 
 @Injectable()
 export class UserService {
@@ -15,19 +14,6 @@ export class UserService {
     return this.prismaService.user.create({
       data: createUserDto,
     });
-  }
-
-  async login(loginUserDto: LoginUserDto) {
-    const hashPwd = calculateMD5(loginUserDto.password);
-
-    const users = await this.prismaService.user.findMany({
-      where: { password: hashPwd, name: loginUserDto.name },
-    });
-    if (users.length > 0) {
-      return '登录成功';
-    } else {
-      return '登录失败';
-    }
   }
 
   findAll() {
