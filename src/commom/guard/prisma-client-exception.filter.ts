@@ -21,7 +21,7 @@ export class PrismaClientExceptionFilter
         response.json({
           data: null,
           code: HttpStatus.CONFLICT,
-          msg: message,
+          message,
           success: false,
         });
         break;
@@ -30,7 +30,7 @@ export class PrismaClientExceptionFilter
         response.json({
           data: null,
           code: HttpStatus.CONFLICT,
-          msg: '记录未找到',
+          message: '记录未找到',
           success: false,
         });
         break;
@@ -41,7 +41,7 @@ export class PrismaClientExceptionFilter
         response.json({
           data: null,
           code: HttpStatus.INTERNAL_SERVER_ERROR,
-          msg: message,
+          message,
           success: false,
         });
         break;
