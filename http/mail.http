@@ -1,0 +1,10 @@
+# 邮箱
+POST http://127.0.0.1:5000/mailbox HTTP/1.1
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsIm5hbWUiOiJ4aWFvbWluZzIiLCJpYXQiOjE3MTQwOTY4ODQsImV4cCI6MTcxNDE4MzI4NH0.CLMr18m3HJegtExr-wsc2eT7isZ1L-XK1NXYBPXI7t8
+
+{
+    "to":"535327612@qq.com",
+    "subject":"测试1",
+    "text":"Hello World！！！"
+}
