@@ -4,9 +4,24 @@ import { AppModule } from './app.module';
 import { SuccessResponse } from './commom/success-response';
 import { PrismaClientExceptionFilter } from './commom/guard/prisma-client-exception.filter';
 import { CommonExceptionFilter } from './commom/guard/common-exception.filter';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // swagger
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('nest项目文档')
+    .setDescription('nest-demo api预览')
+    .addSecurity('token', {
+      type: 'apiKey',
+      in: 'header',
+      name: 'token',
+    })
+    .setVersion('1.0')
+    .build();
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('api', app, swaggerDocument);
 
   // 注册prisma错误过滤器
   app.useGlobalFilters(
