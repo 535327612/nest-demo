@@ -1,4 +1,4 @@
-import { Public } from '@/commom/decorators';
+import { Public } from '@/utils/decorators';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';

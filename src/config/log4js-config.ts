@@ -13,9 +13,7 @@ const log4jsConfig: Configuration = {
       filename: `${baseLogPath}/access/access.log`, //日志文件名，会命名为：access.当前时间.log
       alwaysIncludePattern: true,
       pattern: 'yyyyMMdd', //文件名时间格式
-      // daysToKeep: 60,
       numBackups: 3,
-      // category: 'http',
       keepFileExt: true, //是否保留文件后缀
     },
     app: {
@@ -29,7 +27,6 @@ const log4jsConfig: Configuration = {
       },
       //日志文件按日期切割
       pattern: 'yyyyMMdd',
-      // daysToKeep: 60,
       numBackups: 3,
       keepFileExt: true,
     },
@@ -44,7 +41,6 @@ const log4jsConfig: Configuration = {
       },
       //日志文件按日期切割
       pattern: 'yyyyMMdd',
-      // daysToKeep: 60,
       numBackups: 3,
       keepFileExt: true,
     },
@@ -59,12 +55,8 @@ const log4jsConfig: Configuration = {
       appenders: ['console', 'app', 'errors'],
       level: 'DEBUG',
     },
-    // info: { appenders: ['console', 'app', 'errors'], level: 'info' },
-    // access: { appenders: ['console', 'app', 'errors'], level: 'info' },
     http: { appenders: ['access'], level: 'DEBUG' },
   },
-  pm2: false, //使用pm2来管理项目时打开
-  // pm2InstanceVar: 'INSTANCE_ID', // 会根据 pm2 分配的 id 进行区分，以免各进程在写日志时造成冲突
 };
 
 export default log4jsConfig;

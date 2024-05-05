@@ -35,7 +35,12 @@ export class AllExceptionFilter implements ExceptionFilter<Error> {
  Method: ${request.method}
  IP: ${request.ip}
  Response status: ${response.statusCode}
+ Response code: ${code}
  Message: ${exception.message}
+ User: ${request.get('User-Agent')}
+ Parmas: ${JSON.stringify(request.params)}
+ Query: ${JSON.stringify(request.query)}
+ Body: ${JSON.stringify(request.body)}
  Error:\n ${JSON.stringify(exception)}
  Response data:\n ${JSON.stringify(result)}`;
     Logger.error(logFormat);

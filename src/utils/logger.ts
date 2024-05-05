@@ -1,6 +1,3 @@
-// import chalk from 'chalk';
-// import dayjs from 'dayjs';
-// import { inspect } from 'util';
 import { basename } from 'path';
 import * as Log4js from 'log4js';
 import { StackFrame, getSync } from 'stacktrace-js';
@@ -18,81 +15,6 @@ export enum LoggerLevel {
   FATAL = 'FATAL',
   OFF = 'OFF',
 }
-
-// 内容跟踪类
-export class ContextTrace {
-  constructor(
-    public readonly context: string,
-    public readonly path?: string,
-    public readonly lineNumber?: number,
-    public readonly columnNumber?: number,
-  ) {}
-}
-
-// Log4js.addLayout('Awesome-nest', (logConfig: any) => {
-//   return (logEvent: Log4js.LoggingEvent): string => {
-//     console.log('---logConfig---', logConfig);
-//     console.log('---logEvent---', logEvent);
-
-//     let moduleName: string = '';
-//     let position: string = '';
-
-//     //日志组装
-//     const messageList: string[] = [];
-//     logEvent.data.forEach((value: any) => {
-//       if (value instanceof ContextTrace) {
-//         moduleName = value.context;
-//         //显示触发日志的坐标（行/列）
-//         if (value.lineNumber && value.columnNumber) {
-//           position = `${value.lineNumber},${value.columnNumber}`;
-//         }
-//         return;
-//       }
-//       if (typeof value !== 'string') {
-//         value = inspect(value, false, 3, true);
-//       }
-//       messageList.push(value);
-//     });
-//     console.log('---messageList---', messageList);
-
-//     //日志组成部分
-//     const messageOutput: string = messageList.join(' ');
-//     const positionOutput: string = position ? `[${position}]` : '';
-//     const typeOutput: string = `[${logConfig.type}]${logEvent.pid.toString()} - `;
-//     const dateOutput: string = `${dayjs(logEvent.startTime).format('YYYY-MM-DD HH:mm:ss')}`;
-//     const moduleOutput: string = moduleName
-//       ? `[${moduleName}]`
-//       : '[LoggerService]';
-//     let levelOutput: string = `[${logEvent.level}]${messageOutput}`;
-//     //根据日志级别，用不同颜色区分
-//     switch (logEvent.level.toString()) {
-//       case LoggerLevel.DEBUG:
-//         levelOutput = chalk.green(levelOutput);
-//         break;
-
-//       case LoggerLevel.INFO:
-//         levelOutput = chalk.cyan(levelOutput);
-//         break;
-
-//       case LoggerLevel.WARN:
-//         levelOutput = chalk.yellow(levelOutput);
-//         break;
-
-//       case LoggerLevel.ERROR:
-//         levelOutput = chalk.red(levelOutput);
-//         break;
-
-//       case LoggerLevel.FATAL:
-//         levelOutput = chalk.hex('#DD4C35')(levelOutput);
-//         break;
-
-//       default:
-//         levelOutput = chalk.grey(levelOutput);
-//         break;
-//     }
-//     return `${chalk.green(typeOutput)} ${dateOutput} ${chalk.yellow(moduleOutput)}${levelOutput}${positionOutput}`;
-//   };
-// });
 
 // 注入配置
 Log4js.configure(log4jsConfig);
