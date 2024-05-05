@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import { CommonException } from '@/commom/normal-exception';
+import { HttpException, Injectable } from '@nestjs/common';
 import { SendMailDto } from './dto/send-mail';
 
 @Injectable()
@@ -17,7 +16,7 @@ export class MailboxService {
         from: process.env.MAILER_USER,
       });
     } catch (e: any) {
-      throw new CommonException(e.response, e.responseCode);
+      throw new HttpException(e.response ?? e.message, e.responseCode);
     }
   }
 }

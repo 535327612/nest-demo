@@ -3,8 +3,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { SuccessResponse } from './commom/success-response';
 import { PrismaClientExceptionFilter } from './commom/guard/prisma-client-exception.filter';
-import { CommonExceptionFilter } from './commom/guard/common-exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AllExceptionFilter } from './utils/filter/all-exception.filter';
+// import { loggerMiddleware } from './utils/middleware/logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,9 +26,10 @@ async function bootstrap() {
 
   // 注册prisma错误过滤器
   app.useGlobalFilters(
+    new AllExceptionFilter(),
     new PrismaClientExceptionFilter(),
-    new CommonExceptionFilter(),
   );
+  // app.use(loggerMiddleware);
   // 统一响应拦截器
   app.useGlobalInterceptors(new SuccessResponse());
   // 注册数据校验
