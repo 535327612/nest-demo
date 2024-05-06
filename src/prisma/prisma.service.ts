@@ -11,7 +11,12 @@ export class PrismaService
   }
 
   async onModuleInit() {
-    await this.$connect();
+    try {
+      await this.$connect();
+    } catch (e: any) {
+      console.log(e);
+      process.exit();
+    }
   }
 
   async onModuleDestroy() {
